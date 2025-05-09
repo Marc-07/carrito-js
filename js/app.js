@@ -31,6 +31,14 @@ carrito.addEventListener("click", (e) => {
     }
 })
 
+//Vaciar carrito
+vaciarCarrito.addEventListener("click", (e) => {
+    articulosCarrito = [];
+
+    limpiarHTML();
+})
+
+
 //Funciones
 const leerDatosCurso = (curso => {
     // console.log(curso)
@@ -85,10 +93,7 @@ const carritoHTML = () => {
         listaCarrito.appendChild(row)
 
     })
-
 }
-
-
 
 //Elimina los elementos del tbody
 const limpiarHTML = () => {
@@ -96,4 +101,3 @@ const limpiarHTML = () => {
         listaCarrito.removeChild(listaCarrito.firstChild);
     }
 }
-
