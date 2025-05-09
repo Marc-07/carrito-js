@@ -30,10 +30,22 @@ const leerDatosCurso = (curso => {
         cantidad: 1   
     }
 
-    //Agrega elementos al arreglo del carrito
-    articulosCarrito = [...articulosCarrito, infoCurso];
-    console.log(articulosCarrito);
-
+    //Verifica que existe un articulo
+    const existe = articulosCarrito.some(curso => curso.id === infoCurso.id);
+    if (existe) {
+        const cursos = articulosCarrito.map (curso => {
+            if(curso.id === infoCurso.id){
+                curso.cantidad++;
+                return curso;
+            }else {
+                return curso;
+            }
+        })
+    } else {
+        //Agrega elementos al arreglo del carrito
+        articulosCarrito = [...articulosCarrito, infoCurso];
+        console.log(articulosCarrito);
+    }
     carritoHTML();
 })
 
@@ -43,19 +55,25 @@ const carritoHTML = () => {
     limpiarHTML();
 
     articulosCarrito.forEach( curso => {
+        const { imagen, nombre, precio, cantidad, id} = curso;
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>
-                
-                ${curso.nombre}
-               
+                <img src="${imagen}" width="100">
             </td>
+            <td>${nombre}</td>
+            <td>${precio}</td>
+            <td>${cantidad}</td>
+            <td><a href="#" class="borrar-curso" data-id="${id}"> X </a></td>
         `;
 
         //Agrega el html del carrito en el tbody
         listaCarrito.appendChild(row)
     })
+
 }
+
+
 
 //Elimina los elementos del tbody
 const limpiarHTML = () => {
