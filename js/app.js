@@ -31,13 +31,19 @@ carrito.addEventListener("click", (e) => {
     }
 })
 
+//Muestra los cursos de LS
+document.addEventListener("DOMContentLoaded", () => {
+    articulosCarrito = JSON.parse( localStorage.getItem("carrito")) || [];
+
+    carritoHTML();
+})
+
 //Vaciar carrito
 vaciarCarrito.addEventListener("click", (e) => {
     articulosCarrito = [];
 
     limpiarHTML();
 })
-
 
 //Funciones
 const leerDatosCurso = (curso => {
@@ -93,7 +99,14 @@ const carritoHTML = () => {
         listaCarrito.appendChild(row)
 
     })
+
+    //LocalStorage
+    sincronizarStorage();
 }
+
+const sincronizarStorage = (() => {
+    localStorage.setItem ("carrito", JSON.stringify(articulosCarrito))
+})
 
 //Elimina los elementos del tbody
 const limpiarHTML = () => {
